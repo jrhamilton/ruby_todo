@@ -1,9 +1,33 @@
 #require 'task'
 
-class List
+class Category
+  @@all_categories = []
+
+  def Category.all
+    @@all_categories
+  end
+
+  def Category.clear
+    @@all_categories = []
+  end
+
+  def Category.create(category)
+    new_category = Category.new(category)
+    new_category.save
+    new_category
+  end
+
   def initialize(category)
     @category = category
     @tasks = []
+  end
+
+  def save
+    @@all_categories << self
+  end
+
+  def get_category(choice)
+    @@all_categories[choice - 1]
   end
 
   def category
